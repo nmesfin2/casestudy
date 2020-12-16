@@ -37,7 +37,7 @@ export const Login = ({login,isAuthenticated}) => {
     };
 
     if(isAuthenticated){
-      return <Redirect to='/dashboard'></Redirect>
+      return <Redirect to='/products'></Redirect>
     }
 
     return (

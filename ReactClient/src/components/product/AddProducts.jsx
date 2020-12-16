@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-const AddProduct = ({productAdd,isAuthenticated}) => {
+const AddProduct = ({productAdd,isAuthenticated, errorOccured}) => {
   const [formData,setFormData] = useState(
     {
       productName:'',
@@ -31,12 +31,14 @@ const AddProduct = ({productAdd,isAuthenticated}) => {
       };
         // action 
       console.log('hello from register component'+JSON.stringify(formData))
-      try{
-        productAdd(formData);
-        <Redirect to='/products'></Redirect>
-      } catch{
-        alert("something went wrong")
+
+      if(errorOccured){
+        return <Redirect to='/dashboard'></Redirect>
       }
+     
+        productAdd(formData);
+        
+        
     
       
     };
@@ -54,13 +56,13 @@ const AddProduct = ({productAdd,isAuthenticated}) => {
                       </div>
                       <div className="form-group">
                         <input type="text" className="form-control form-control-lg" placeholder="Category " name="category" value={category} onChange={onChange}/>
-                        {/* <small className="form-text text-muted">This site uses Gravatar so if you want a profile image, use a Gravatar email</small> */}
                       </div>
                       <div className="form-group">
                         <input type="text" className="form-control form-control-lg" placeholder="Product Description" name="description"  value={description} onChange={onChange}/>
                       </div>
                       <div className="form-group">
                         <input type="text" className="form-control form-control-lg" placeholder="Expiry Date" name="expiryDate" value={expiryDate} onChange={onChange} />
+                        <small className="form-text text-muted">Date Format: YYYY/MM/DD (it should be greater than current date) </small> 
                       </div>
                       <input type="submit" className="btn btn-info btn-block mt-4" />
                     </form>
@@ -73,11 +75,13 @@ const AddProduct = ({productAdd,isAuthenticated}) => {
 
   AddProduct.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    productAdd:PropTypes.func.isRequired
+    productAdd:PropTypes.func.isRequired,
+    errorOccured:PropTypes.bool.isRequired
   }
   
   const mapStateToProps = (state) => ({
-    isAuthenticated : state.auth.isAuthenticated
+    isAuthenticated : state.auth.isAuthenticated,
+    errorOccured : state.auth.errorOccured
     
   })
   

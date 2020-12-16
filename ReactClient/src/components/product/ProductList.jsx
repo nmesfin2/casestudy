@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import {Redirect} from 'react-router-dom'
 import { Table, Button, Alert } from 'react-bootstrap';
+import axios from 'axios'
+
 
 export default class ProductList extends Component {
     constructor(props) {
@@ -11,6 +14,7 @@ export default class ProductList extends Component {
         }
       }
     
+      
       componentDidMount() {
         const apiUrl = 'http://localhost:9010/api/v1/product';
     
@@ -28,31 +32,32 @@ export default class ProductList extends Component {
           )
       }
     
-      deleteProduct(productId) {
-        const { products } = this.state;
+      fetchAgain(){
+        const apiUrl = 'http://localhost:9010/api/v1/product';
     
-        const apiUrl = 'http://localhost/dev/tcxapp/reactapi/deleteProduct';
-        const formData = new FormData();
-        formData.append('productId', productId);
-    
-        const options = {
-          method: 'POST',
-          body: formData
-        }
-    
-        fetch(apiUrl, options)
+        fetch(apiUrl)
           .then(res => res.json())
           .then(
             (result) => {
               this.setState({
-                response: result,
-                products: products.filter(product => product.id !== productId)
+                products: result
               });
             },
             (error) => {
               this.setState({ error });
             }
           )
+      }
+
+      deleteProduct(productId) {
+        axios.delete('http://localhost:9010/api/v1/product/'+ productId)
+         .then(res => this.fetchAgain())
+         
+         .catch(err =>console.log(JSON.stringify(err)))
+      }
+
+      addProduct(){
+        <Redirect to="/addproduct"></Redirect>
       }
     
       render() {
@@ -65,6 +70,11 @@ export default class ProductList extends Component {
         } else {
           return(
             <div>
+              <div>
+              <a href="addproduct" className="btn btn-lg btn-info mr-2">
+                  Add New Product
+                </a>
+              </div>
               <h2>Product List</h2>
               {this.state.response.message && <Alert variant="info">{this.state.response.message}</Alert>}
               <Table>
@@ -85,8 +95,8 @@ export default class ProductList extends Component {
                       <td>{product.category}</td>
                       <td>{product.description}</td>
                       <td>
-                        <Button variant="info" onClick={() => this.props.editProduct(product.id)}>Edit</Button>
-                        &nbsp;<Button variant="danger" onClick={() => this.deleteProduct(product.id)}>Delete</Button>
+                        <Button variant="info" onClick={() => this.props.editProduct(product.productId)}>Edit</Button>
+                        &nbsp;<Button variant="danger" onClick={() => this.deleteProduct(product.productId)}>Delete</Button>
                       </td>
                     </tr>
                   ))}

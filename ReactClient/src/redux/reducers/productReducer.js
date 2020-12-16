@@ -1,8 +1,10 @@
+import { ADDPRODUCT_SUCCESS, ADDPRODUCT_FAIL } from "../actions/types"
+
 const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated :false,
     loading: true,
-    isRegistered: false,
+    errorOccured: false,
     user:null
 }
 
@@ -16,6 +18,10 @@ export default (state = initialState, action) => {
             loading:false 
             
         }
+        case ADDPRODUCT_FAIL:
+            return{
+                errorOccured:true 
+            }
 
     default:
         return state
