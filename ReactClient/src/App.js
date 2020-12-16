@@ -11,6 +11,9 @@ import PostList from './components/layouts/PostList';
 import store from './redux/store/store'
 
 import {Provider} from 'react-redux'
+import Product from './components/product/Product';
+import ProductList from './components/product/ProductList';
+import AddProducts from './components/product/AddProducts';
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/register" component={Register}></Route>
           <Route exact path="/sample" component={sample}></Route>
+          <Route exact path="/products" component={ProductList}></Route>
+          <Route exact path="/postlist" component={PostList}></Route>
+          <Route exact path="/addproduct" component={AddProducts}></Route>
           <Footer></Footer>
         </Router>
       </div>
