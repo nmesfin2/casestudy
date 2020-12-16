@@ -60,9 +60,12 @@ export default class ProductList extends Component {
         <Redirect to="/addproduct"></Redirect>
       }
     
-      render() {
+    render() {
         const { error, products} = this.state;
-    
+        if(localStorage.getItem("data") == null){
+          return <Redirect to='/login'></Redirect>
+        }
+
         if(error) {
           return (
             <div>Error: {error.message}</div>
@@ -95,7 +98,7 @@ export default class ProductList extends Component {
                       <td>{product.category}</td>
                       <td>{product.description}</td>
                       <td>
-                        <Button variant="info" onClick={() => this.props.editProduct(product.productId)}>Edit</Button>
+                        <Button variant="info" onClick={() => this.props.editProduct(product.productId)} disabled>Edit</Button>
                         &nbsp;<Button variant="danger" onClick={() => this.deleteProduct(product.productId)}>Delete</Button>
                       </td>
                     </tr>

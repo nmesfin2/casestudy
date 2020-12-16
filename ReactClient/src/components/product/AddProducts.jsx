@@ -32,16 +32,13 @@ const AddProduct = ({productAdd,isAuthenticated, errorOccured}) => {
         // action 
       console.log('hello from register component'+JSON.stringify(formData))
 
-      if(errorOccured){
-        return <Redirect to='/dashboard'></Redirect>
-      }
-     
-        productAdd(formData);
-        
-        
-    
-      
+      productAdd(formData);
+ 
     };
+
+    if(localStorage.getItem("data")== null){
+      return <Redirect to='/login'></Redirect>
+    }
 
     return (
       <div className="addproduct">

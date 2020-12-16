@@ -86,7 +86,7 @@ const Header = ({ auth: { isAuthenticated }}) => {
           <i className="fas fa-code" /> Product Catalog
         </Link>
       </h1>
-      <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+      <Fragment>{localStorage.getItem("data") == null ?  guestLinks : authLinks }</Fragment>
     </nav>
   );
 };
