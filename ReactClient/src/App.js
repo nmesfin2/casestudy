@@ -14,6 +14,12 @@ import {Provider} from 'react-redux'
 import Product from './components/product/Product';
 import ProductList from './components/product/ProductList';
 import AddProducts from './components/product/AddProducts';
+import PriceList from './components/stock/PriceList';
+import AddPrice from './components/stock/AddPrice';
+import StockList from './components/productstock/StockList';
+import AddStock from './components/productstock/AddStock';
+import AddReview from './components/review/AddReview';
+import ReviewList from './components/review/ReviewList';
 
 function App() {
   return (
@@ -28,6 +34,12 @@ function App() {
           <Route exact path="/products" component={ProductList}></Route>
           <Route exact path="/postlist" component={PostList}></Route>
           <Route exact path="/addproduct" component={AddProducts}></Route>
+          <Route exact path="/addprice" component={AddPrice}></Route>
+          <Route exact path="/price" component={PriceList}></Route>
+          <Route exact path="/stock" component={StockList}></Route>
+          <Route exact path="/addstock" component={AddStock}></Route>
+          <Route exact path="/addreview" component={AddReview}></Route>
+          <Route exact path="/review" component={ReviewList}></Route>
           <Footer></Footer>
         </Router>
       </div>

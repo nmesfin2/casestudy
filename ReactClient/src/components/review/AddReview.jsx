@@ -4,17 +4,17 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-const AddProduct = ({productAdd,isAuthenticated, errorOccured}) => {
+const AddPrice = ({productAdd, isAuthenticated, errorOccured}) => {
   const [formData,setFormData] = useState(
     {
-      productName:'',
+      PriceName:'',
       category:'',
       description:'',
       expiryDate:'',
   
     })
 
-    const {productName,category,description,expiryDate} = formData;
+    const {PriceName,category,description,expiryDate} = formData;
     const onChange=(e) =>{
 
     setFormData({...formData,[e.target.name]:e.target.value})
@@ -23,8 +23,8 @@ const AddProduct = ({productAdd,isAuthenticated, errorOccured}) => {
 
     const onSubmit =(e)=>{
       e.preventDefault();
-      const newProduct = {
-        productName : productName,
+      const newPrice = {
+        PriceName : PriceName,
         category:category,
         description:description,
         expiryDate:expiryDate
@@ -41,24 +41,29 @@ const AddProduct = ({productAdd,isAuthenticated, errorOccured}) => {
     }
 
     return (
-      <div className="addproduct">
+      <div className="addPrice">
               <div className="container">
                 <div className="row">
                   <div className="col-md-8 m-auto">
-                    <h1 className="display-4 text-center">Add Product</h1>
-                    <p className="lead text-center">Create your ProductCat account</p>
+                    <h1 className="display-4 text-center">Add Review</h1>
+                    <p className="lead text-center">Review Product</p>
                     <form onSubmit={onSubmit}>
-                      <div className="form-group">
-                        <input type="text" className="form-control form-control-lg" placeholder="Product Name" name="productName" required  value={productName} onChange={onChange} />
-                      </div>
-
-                      <div className="form-group">
-                        <input type="text" className="form-control form-control-lg" placeholder="Product Description" name="description"  value={description} onChange={onChange}/>
+                    <div className="form-group">
+                        <input type="text" className="form-control form-control-lg" placeholder="User Name" name="description"  value={description} onChange={onChange}/>
                       </div>
                       <div className="form-group">
+                        <input type="text" className="form-control form-control-lg" placeholder="Product ID" name="PriceName" required  value={PriceName} onChange={onChange} />
+                      </div>
+                      <div className="form-group">
+                        <input type="text" className="form-control form-control-lg" placeholder="Comment" name="PriceName" required  value={PriceName} onChange={onChange} />
+                      </div>
+                      <div className="form-group">
+                        <input type="text" className="form-control form-control-lg" placeholder="Rating" name="description"  value={description} onChange={onChange}/>
+                      </div>
+                      {/* <div className="form-group">
                         <input type="text" className="form-control form-control-lg" placeholder="Expiry Date" name="expiryDate" value={expiryDate} onChange={onChange} />
                         <small className="form-text text-muted">Date Format: YYYY/MM/DD (it should be greater than current date) </small> 
-                      </div>
+                      </div> */}
                       <input type="submit" className="btn btn-info btn-block mt-4" />
                     </form>
                   </div>
@@ -68,9 +73,9 @@ const AddProduct = ({productAdd,isAuthenticated, errorOccured}) => {
     )
   }
 
-  AddProduct.propTypes = {
+  AddPrice.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    productAdd:PropTypes.func.isRequired,
+    PriceAdd:PropTypes.func.isRequired,
     errorOccured:PropTypes.bool.isRequired
   }
   
@@ -84,6 +89,6 @@ const AddProduct = ({productAdd,isAuthenticated, errorOccured}) => {
     
   }
   
-  export default connect(mapStateToProps, {productAdd})(AddProduct)
+  export default connect(mapStateToProps, {productAdd})(AddPrice)
 
     
